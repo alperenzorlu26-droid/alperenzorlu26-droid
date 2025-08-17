@@ -5,42 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Login/Register</title>
 <style>
-  /* Arka plan gif */
   body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
+    margin: 0; padding: 0; height: 100vh;
     background: url('https://i.pinimg.com/originals/b0/eb/92/b0eb9271c6f47e7a63a2c95fce4a3cd5.gif') no-repeat center center fixed;
     background-size: cover;
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; justify-content: center; align-items: center;
   }
 
-  /* Form kapsayıcı */
   .container {
     background: rgba(0, 0, 0, 0.6);
     padding: 30px 40px;
     border-radius: 10px;
     box-shadow: 0 0 15px #000;
-    width: 320px;
+    width: 300px; /* inputları 1cm kısalttım */
     color: white;
+    position: relative;
   }
 
   h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    text-align: center;
+    margin-top: 0; margin-bottom: 15px; text-align: center;
   }
 
   input {
-    width: 100%;
+    width: calc(100% - 20px); /* input içindeki paddingle birlikte toplam 1cm azaldı */
     padding: 10px;
     margin-bottom: 15px;
     border: none;
     border-radius: 5px;
     font-size: 14px;
+    display: block;
   }
 
   button {
@@ -57,10 +51,34 @@
   button:hover {
     background: #1c86ee;
   }
+
+  /* Mesaj kutusu */
+  #messageBox {
+    position: absolute;
+    top: 10px;
+    left: -320px;
+    width: 280px;
+    padding: 15px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 10px #000;
+    display: none;
+  }
+
+  #messageBox.success {
+    background-color: #4CAF50;
+  }
+
+  #messageBox.error {
+    background-color: #f44336;
+  }
 </style>
 </head>
 <body>
   <div class="container">
+    <div id="messageBox"></div>
+
     <h2>Giriş</h2>
     <input id="loginEmail" type="email" placeholder="Email" />
     <input id="loginPass" type="password" placeholder="Şifre" />
@@ -73,7 +91,6 @@
     <button onclick="register()">Kayıt Ol</button>
   </div>
 
-  <!-- Firebase v10 -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
@@ -88,13 +105,25 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
+    const msgBox = document.getElementById('messageBox');
+
+    function showMessage(text, type) {
+      msgBox.textContent = text;
+      msgBox.className = '';
+      msgBox.classList.add(type);
+      msgBox.style.display = 'block';
+      setTimeout(() => {
+        msgBox.style.display = 'none';
+      }, 3500);
+    }
+
     window.login = function () {
       const email = document.getElementById('loginEmail').value;
       const pass = document.getElementById('loginPass').value;
 
       signInWithEmailAndPassword(auth, email, pass)
-      .then(() => alert("Giriş Başarılı"))
-        .catch(e => alert(e.message));
+        .then(() => showMessage("Giriş Başarılı", "success"))
+        .catch(e => showMessage(e.message, "error"));
     }
 
     window.register = function () {
@@ -103,13 +132,13 @@
       const passConfirm = document.getElementById('regPassConfirm').value;
 
       if(pass !== passConfirm){
-        alert("Şifreler eşleşmiyor!");
+        showMessage("Şifreler eşleşmiyor!", "error");
         return;
       }
 
       createUserWithEmailAndPassword(auth, email, pass)
-        .then(() => alert("Kayıt Başarılı"))
-        .catch(e => alert(e.message));
+        .then(() => showMessage("Kayıt Başarılı", "success"))
+        .catch(e => showMessage(e.message, "error"));
     }
   </script>
 </body>
