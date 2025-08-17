@@ -1,93 +1,86 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Giriş & Kayıt</title>
-<style>
-  body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  body {
-    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
-    background-size: cover;
-    position: relative;
-  }
-  body::before {
-    content: "";
-    position: fixed;
-    top:0; left:0; right:0; bottom:0;
-    background: rgba(0,0,0,0.5);
-    z-index: 0;
-  }
-  .container {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    gap: 40px;
-    background: rgba(255, 255, 255, 0.85);
-    padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    max-width: 700px;
-    margin: auto;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .form-box {
-    width: 300px;
-  }
-  h2 {
-    margin-bottom: 20px;
-    color: #333;
-  }
-  input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1.5px solid #ddd;
-    border-radius: 6px;
-    font-size: 15px;
-  }
-  button {
-    width: 100%;
-    padding: 12px;
-    background: #007BFF;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  button:hover {
-    background: #0056b3;
-  }
-</style>
+  <title>Giriş</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url('https://i.pinimg.com/originals/b0/eb/92/b0eb9271c6f47e7a63a2c95fce4a3cd5.gif') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+    #welcome {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+      background: rgba(0,0,0,0.4);
+      z-index: 10;
+    }
+    #loginForm {
+      display: none;
+      max-width: 320px;
+      margin: 100px auto;
+      background: rgba(0,0,0,0.5);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.8);
+    }
+    #loginForm h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    #loginForm input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    #loginForm button {
+      width: 100%;
+      padding: 10px;
+      background-color: #1a73e8;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+    #loginForm button:hover {
+      background-color: #1669c1;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <div class="form-box">
-      <h2>Giriş</h2>
-      <input id="loginEmail" type="email" placeholder="Email" />
-      <input id="loginPass" type="password" placeholder="Şifre" />
-      <button onclick="login()">Giriş Yap</button>
-    </div>
 
-    <div class="form-box">
-      <h2>Kayıt</h2>
-      <input id="regEmail" type="email" placeholder="Email" />
-      <input id="regPass" type="password" placeholder="Şifre" />
-      <input id="regPassRepeat" type="password" placeholder="Şifre Tekrar" />
-      <button onclick="register()">Kayıt Ol</button>
-    </div>
+  <div id="welcome">Hoşgeldin</div>
+
+  <div id="loginForm">
+    <h2>Giriş</h2>
+    <input id="loginEmail" placeholder="Email" type="email" required><br>
+    <input id="loginPass" type="password" placeholder="Şifre" required><br>
+    <button onclick="login()">Giriş Yap</button>
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDCPpr2qtXZTWzxTjYL2_Wuhmr3paIagYA",
@@ -95,31 +88,25 @@
       projectId: "ddnet-e59a3",
       appId: "1:261161650747:web:def20674be2b15d0186a1e"
     };
+
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    window.login = function() {
+    window.login = function () {
       const email = document.getElementById('loginEmail').value;
       const pass = document.getElementById('loginPass').value;
+
       signInWithEmailAndPassword(auth, email, pass)
         .then(() => alert("Giriş Başarılı"))
         .catch(e => alert(e.message));
-    };
+    }
 
-    window.register = function() {
-      const email = document.getElementById('regEmail').value;
-      const pass = document.getElementById('regPass').value;
-      const passRepeat = document.getElementById('regPassRepeat').value;
-
-      if(pass !== passRepeat){
-        alert("Şifreler uyuşmuyor!");
-        return;
-      }
-
-      createUserWithEmailAndPassword(auth, email, pass)
-        .then(() => alert("Kayıt Başarılı"))
-        .catch(e => alert(e.message));
-    };
+    // 1.5 saniye sonra hoşgeldin gizlenip form gösterilsin
+    setTimeout(() => {
+      document.getElementById('welcome').style.display = 'none';
+      document.getElementById('loginForm').style.display = 'block';
+    }, 1500);
   </script>
+
 </body>
 </html>
