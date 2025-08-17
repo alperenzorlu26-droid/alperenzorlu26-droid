@@ -1,105 +1,228 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Giriş Yap</title>
   <style>
     body {
       margin: 0;
+      padding: 0;
+      background: #121212;
       font-family: Arial, sans-serif;
-      background: url("https://i.gifer.com/XVKg.gif") no-repeat center center fixed;
-      background-size: cover;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
+
     .login-box {
-      background-color: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.6);
       padding: 40px;
-      border-radius: 10px;
-      color: white;
-      width: 350px;
-      box-shadow: 0 0 10px #000;
+      border-radius: 12px;
+      width: 360px;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
     }
+
     .login-box h2 {
       margin-bottom: 20px;
+      font-size: 24px;
     }
-    .login-box input {
+
+    input[type="email"],
+    input[type="password"] {
       width: 100%;
       padding: 12px;
-      margin-bottom: 15px;
+      margin: 10px 0;
       border: none;
-      border-radius: 5px;
-      background-color: #444;
-      color: white;
+      background: #2e2e2e;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 14px;
     }
-    .login-box button {
+
+    button {
       width: 100%;
       padding: 12px;
       border: none;
-      border-radius: 5px;
-      background-color: #1a73e8;
-      color: white;
-      font-weight: bold;
+      border-radius: 6px;
+      background: #4285f4;
+      color: #fff;
+      font-size: 16px;
       cursor: pointer;
-    }
-    .login-box .link {
       margin-top: 10px;
-      display: flex;
-      justify-content: space-between;
     }
+
+    button:hover {
+      background: #357ae8;
+    }
+
+    .alt-link {
+      margin-top: 15px;
+      text-align: center;
+    }
+    .alt-link a {
+      color: #8ab4f8;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
     .error {
-      background: #ff4c4c;
+      background: #b00020;
       color: white;
       padding: 10px;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      animation: fade 0.5s ease-in-out;
-    }
-    @keyframes fade {
-      0% {opacity: 0;}
-      100% {opacity: 1;}
+      margin-top: 10px;
+      border-radius: 6px;
+      display: none;
     }
   </style>
 </head>
 <body>
 
-<div class="login-box">
-  <h2>Oturum Aç</h2>
-  <div id="errorBox" class="error" style="display:none;"></div>
-  <input id="email" type="email" placeholder="E-posta" />
-  <input id="password" type="password" placeholder="Şifre" />
-  <button onclick="login()">Giriş Yap</button>
-  <div class="link">
-    <a href="#" style="color:#8ab4f8;" onclick="createAccount()">Hesap oluşturun</a>
+  <div class="login-box">
+    <h2>Oturum Açın</h2>
+    <input type="email" id="email" placeholder="E-posta">
+    <input type="password" id="password" placeholder="Şifre">
+    <div class="error" id="errorBox">Hatalı giriş! Lütfen bilgileri kontrol edin.</div>
+    <button onclick="login()">Giriş Yap</button>
+    <div class="alt-link">
+      <a href="#">Hesap oluşturun</a>
+    </div>
   </div>
-</div>
 
-<script>
-  function login() {
-    const email = document.getElementById('email').value;
-    const pass = document.getElementById('password').value;
-    const errorBox = document.getElementById('errorBox');
+  <script>
+    function login() {
+      const email = document.getElementById("email").value;
+      const pass = document.getElementById("password").value;
+      const errorBox = document.getElementById("errorBox");
 
-    if (email === "" || pass === "") {
-      errorBox.style.display = "block";
-      errorBox.textContent = "E-posta ve şifre boş olamaz!";
-    } else if (email !== "ornek@mail.com" || pass !== "123456") {
-      errorBox.style.display = "block";
-      errorBox.textContent = "E-posta veya şifre hatalı!";
-    } else {
-      errorBox.style.display = "none";
-      alert("Giriş başarılı!");
+      if (email === "test@gmail.com" && pass === "123456") {
+        alert("Giriş başarılı!");
+      } else {
+        errorBox.style.display = "block";
+      }
     }
-  }
-
-  function createAccount() {
-    alert("Yönlendiriliyorsunuz...");
-    window.location.href = "https://discord.gg/Zeyw3utn";
-  }
-</script>
+  </script>
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Giriş Yap</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+    }
+
+    .login-container {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 40px;
+      border-radius: 10px;
+      width: 350px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      background-color: #3a3a3a;
+      color: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background-color: #4285F4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .error {
+      background-color: #ff4c4c;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      animation: fade 0.5s;
+    }
+
+    .success {
+      background-color: #4caf50;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      animation: fade 0.5s;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .create-link {
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    .create-link a {
+      color: #8ab4f8;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Oturum Aç</h2>
+    <input type="email" id="email" placeholder="E-posta">
+    <input type="password" id="password" placeholder="Şifre">
+    <button onclick="login()">Giriş Yap</button>
+    <div class="create-link">
+      <a href="#">Hesap oluşturun</a>
+    </div>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const msg = document.getElementById('message');
+
+      msg.innerHTML = "";
+
+      if (!email || !password) {
+        msg.innerHTML = '<div class="error">Lütfen tüm alanları doldurun!</div>';
+        return;
+      }
+
+      if (email === "admin@example.com" && password === "123456") {
+        msg.innerHTML = '<div class="success">Giriş başarılı!</div>';
+      } else {
+        msg.innerHTML = '<div class="error">E-posta veya şifre hatalı!</div>';
+      }
+    }
+  </script>
+
+</body>
+</html>
+  
