@@ -1,79 +1,69 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <title>KROS-TR Anasayfa</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      height: 100vh;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      flex-direction: column;
-      text-align: center;
-      padding: 20px;
-    }
-    h1 {
-      font-size: 3.5rem;
-      margin-bottom: 15px;
-      text-shadow: 0 0 15px rgba(255,255,255,0.6);
-      animation: glow 3s ease-in-out infinite alternate;
-    }
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #fff, 0 0 20px #a29bfe, 0 0 30px #6c5ce7; }
-      to { text-shadow: 0 0 20px #ffeaa7, 0 0 30px #fab1a0, 0 0 40px #e17055; }
-    }
-    p {
-      font-size: 1.4rem;
-      margin-bottom: 40px;
-      max-width: 600px;
-      line-height: 1.5;
-      text-shadow: 0 0 8px rgba(0,0,0,0.2);
-    }
-    a.button {
-      display: inline-block;
-      background: #fd79a8;
-      color: white;
-      font-weight: 700;
-      text-decoration: none;
-      padding: 15px 40px;
-      border-radius: 50px;
-      box-shadow: 0 4px 15px rgba(253,121,168,0.6);
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-    }
-    a.button:hover {
-      background: #d63031;
-      box-shadow: 0 6px 20px rgba(214,48,49,0.7);
-    }
-    footer {
-      position: fixed;
-      bottom: 10px;
-      left: 10px;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.5);
-      cursor: pointer;
-      user-select: none;
-      transition: color 0.3s ease;
-    }
-    footer:hover {
-      color: rgba(255,255,255,0.9);
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KROS-TR Anasayfa</title>
+<style>
+  body {
+    margin: 0; padding: 0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e2a38, #2a3e59);
+    color: #fff;
+    display: flex; 
+    flex-direction: column; 
+    min-height: 100vh;
+  }
+  header {
+    padding: 20px; 
+    background: #0a1f36;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+  main {
+    flex: 1;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+  }
+  main h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px #4caf50;
+  }
+  main p {
+    font-size: 1.25rem;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+  footer {
+    background: #0a1f36;
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+  a {
+    color: #4caf50;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
 </head>
 <body>
-  <h1>KROS-TR</h1>
-  <p>Aramıza hoş geldin! Burada en güncel içerikler ve topluluk seni bekliyor. Keyifli zaman geçir!</p>
-  <a href="index.html" class="button">Çıkış Yap</a>
-
-  <footer onclick="window.open('https://discord.gg/Zeyw3utn', '_blank')">
-    Kurucu Kros-TR@
-  </footer>
+<header>KROS-TR</header>
+<main>
+  <h1>Hoşgeldiniz!</h1>
+  <p>Bu, basit ve modern bir anasayfa örneğidir. İstersen buraya içerik ekleyebilir, projeni tanıtabilirsin.</p>
+  <p>Daha fazla bilgi için <a href="https://discord.gg/Zeyw3utn" target="_blank" rel="noopener">Discord kanalımıza katılın</a>.</p>
+</main>
+<footer>© 2025 KROS-TR. Tüm hakları saklıdır.</footer>
 </body>
 </html>
