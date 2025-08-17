@@ -1,149 +1,79 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>KROS-TR Giriş</title>
-<style>
-  body {
-    margin: 0; padding: 0; height: 100vh;
-    background: url('https://i.gifer.com/XVKg.gif') no-repeat center center fixed;
-    background-size: cover;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex; justify-content: center; align-items: center; flex-direction: column;
-  }
-  #loginBox {
-    background: rgba(0,0,0,0.7);
-    padding: 30px 40px;
-    border-radius: 10px;
-    width: 320px;
-    box-sizing: border-box;
-    color: #eee;
-    box-shadow: 0 0 15px rgba(0,0,0,0.8);
-    opacity: 0;
-    animation: fadeIn 2s forwards;
-    animation-delay: 5s;
-  }
-  h1 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #57a6ff;
-    text-shadow: 0 0 10px #57a6ff;
-  }
-  input {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 5px;
-    background: #444;
-    color: #eee;
-    font-size: 16px;
-    box-sizing: border-box;
-  }
-  button {
-    width: 100%;
-    padding: 12px;
-    background: #57a6ff;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  button:hover {
-    background: #3a84e6;
-  }
-  #errorMsg {
-    margin-top: 10px;
-    color: #ff5c5c;
-    font-weight: bold;
-    height: 20px;
-    text-align: center;
-  }
-  a.createAccount {
-    display: block;
-    margin-top: 15px;
-    text-align: center;
-    color: #9ecaff;
-    text-decoration: none;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  a.createAccount:hover {
-    text-decoration: underline;
-  }
-  #footerText {
-    position: fixed;
-    bottom: 10px; left: 10px;
-    color: rgba(255,255,255,0.5);
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    user-select: none;
-    transition: color 0.3s;
-  }
-  #footerText:hover {
-    color: rgba(255,255,255,0.9);
-  }
-  @keyframes fadeIn {
-    to {opacity: 1;}
-  }
-</style>
+  <meta charset="UTF-8" />
+  <title>KROS-TR Anasayfa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+      text-shadow: 0 0 15px rgba(255,255,255,0.6);
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff, 0 0 20px #a29bfe, 0 0 30px #6c5ce7; }
+      to { text-shadow: 0 0 20px #ffeaa7, 0 0 30px #fab1a0, 0 0 40px #e17055; }
+    }
+    p {
+      font-size: 1.4rem;
+      margin-bottom: 40px;
+      max-width: 600px;
+      line-height: 1.5;
+      text-shadow: 0 0 8px rgba(0,0,0,0.2);
+    }
+    a.button {
+      display: inline-block;
+      background: #fd79a8;
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 15px 40px;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(253,121,168,0.6);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    a.button:hover {
+      background: #d63031;
+      box-shadow: 0 6px 20px rgba(214,48,49,0.7);
+    }
+    footer {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+    footer:hover {
+      color: rgba(255,255,255,0.9);
+    }
+  </style>
 </head>
 <body>
-
-<div id="loginBox">
   <h1>KROS-TR</h1>
-  <input type="email" id="email" placeholder="E-posta" />
-  <input type="password" id="password" placeholder="Şifre" />
-  <button onclick="login()">Giriş Yap</button>
-  <div id="errorMsg"></div>
-  <a href="https://discord.gg/Zeyw3utn" target="_blank" class="createAccount">Hesap Oluştur</a>
-</div>
-<div id="footerText" onclick="window.open('https://discord.gg/Zeyw3utn','_blank')">Kurucu Kros-TR@</div>
+  <p>Aramıza hoş geldin! Burada en güncel içerikler ve topluluk seni bekliyor. Keyifli zaman geçir!</p>
+  <a href="index.html" class="button">Çıkış Yap</a>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyAONQMX3pl-P5i2JQjoj5qbNtvKPdegITE",
-    authDomain: "login-aa0a4.firebaseapp.com",
-    projectId: "login-aa0a4",
-    storageBucket: "login-aa0a4.firebasestorage.app",
-    messagingSenderId: "222150441225",
-    appId: "1:222150441225:web:5e96c2c972f50f54edbbd8",
-    measurementId: "G-YZ4CHCJBCB"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  function showError(msg) {
-    const errorBox = document.getElementById('errorMsg');
-    errorBox.textContent = msg;
-    setTimeout(() => { errorBox.textContent = ''; }, 4000);
-  }
-
-  window.login = function() {
-    const email = document.getElementById('email').value.trim();
-    const pass = document.getElementById('password').value.trim();
-    if (!email || !pass) {
-      showError("Lütfen e-posta ve şifre girin!");
-      return;
-    }
-    signInWithEmailAndPassword(auth, email, pass)
-      .then(() => {
-        window.location.href = "anasayfa.html";  // Anasayfa linkini kendi dosyan ile değiştir
-      })
-      .catch((error) => {
-        showError("Giriş başarısız: " + error.message);
-      });
-  }
-</script>
-
+  <footer onclick="window.open('https://discord.gg/Zeyw3utn', '_blank')">
+    Kurucu Kros-TR@
+  </footer>
 </body>
 </html>
