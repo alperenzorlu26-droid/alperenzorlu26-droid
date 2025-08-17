@@ -1,20 +1,17 @@
 js
-// Firebase yapılandırması
-const firebaseConfig = {
-    apiKey: "AIzaSyDCPpr2qtXZTWzxTjYL2_Wuhmr3paIagYA",
-    authDomain: "ddnet-e59a3.firebaseapp.com",
-    projectId: "ddnet-e59a3",
-    storageBucket: "ddnet-e59a3.firebasestorage.app",
-    messagingSenderId: "261161650747",
-    appId: "1:261161650747:web:def20674be2b15d0186a1e",
-    measurementId: "G-FZCWERKNWW"
-  };
+// Firebase yapılandırması (SADECE 1 KEZ TANIMLA)
+var firebaseConfig = {
+  apiKey: "AIzaSyDCPpr2qtXZTWzxTjYL2_Wuhmr3paIagYA",
+  authDomain: "ddnet-e59a3.firebaseapp.com",
+  projectId: "ddnet-e59a3",
+  storageBucket: "ddnet-e59a3.firebasestorage.app",
+  messagingSenderId: "261161650747",
+  appId: "1:261161650747:web:def20674be2b15d0186a1e"
+};
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
+// Başlat
 firebase.initializeApp(firebaseConfig);
+
 
 const auth = firebase.auth();
 

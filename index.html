@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head><title>Login/Register</title></head>
+<head>
+  <title>Login/Register</title>
+</head>
 <body>
   <h2>Giriş</h2>
   <input id="loginEmail" placeholder="Email"><br>
@@ -12,35 +14,38 @@
   <input id="regPass" type="password" placeholder="Şifre"><br>
   <button onclick="register()">Kayıt Ol</button>
 
-  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js"></script>
-  <script>
+  <!-- Firebase v10 -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+
     const firebaseConfig = {
       apiKey: "AIzaSyDCPpr2qtXZTWzxTjYL2_Wuhmr3paIagYA",
       authDomain: "ddnet-e59a3.firebaseapp.com",
       projectId: "ddnet-e59a3",
       appId: "1:261161650747:web:def20674be2b15d0186a1e"
     };
-    firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
 
-    function login() {
-      auth.signInWithEmailAndPassword(
-        document.getElementById('loginEmail').value,
-        document.getElementById('loginPass').value
-      ).then(() => alert("Giriş Başarılı")).catch(e => alert(e.message));
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.login = function () {
+    const email = document.getElementById('loginEmail').value;
+      const pass = document.getElementById('loginPass').value;
+
+      signInWithEmailAndPassword(auth, email, pass)
+        .then(() => alert("Giriş Başarılı"))
+        .catch(e => alert(e.message));
     }
 
-    function register() {
-      auth.createUserWithEmailAndPassword(
-        document.getElementById('regEmail').value,
-        document.getElementById('regPass').value
-      ).then(() => alert("Kayıt Başarılı")).catch(e => alert(e.message));
+    window.register = function () {
+      const email = document.getElementById('regEmail').value;
+      const pass = document.getElementById('regPass').value;
+
+      createUserWithEmailAndPassword(auth, email, pass)
+        .then(() => alert("Kayıt Başarılı"))
+        .catch(e => alert(e.message));
     }
   </script>
-html
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<script src="index.js"></script>
 </body>
 </html>
