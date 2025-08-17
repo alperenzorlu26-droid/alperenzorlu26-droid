@@ -1,119 +1,143 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Giriş</title>
-  <link rel="icon" type="image/png" href="kolay.png">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: url('https://i.gifer.com/XVKg.gif') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      overflow: hidden;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KROS-TR Giriş</title>
+<style>
+  @keyframes glow {
+    0%, 100% {
+      text-shadow: 0 0 8px #57a6ff;
+      color: #57a6ff;
     }
-    .kros-text {
-      text-align: center;
-      font-size: 32px;
-      margin-top: 30px;
-      color: #00e5ff;
-      animation: glow 1.5s infinite alternate;
-      opacity: 0;
-      animation: fadeIn 2s ease 5s forwards;
+    50% {
+      text-shadow: 0 0 20px #9ecaff;
+      color: #9ecaff;
     }
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #00e5ff; }
-      to { text-shadow: 0 0 20px #00e5ff; }
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-    .login-box {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.7);
-      padding: 30px;
-      border-radius: 10px;
-      display: none;
-      animation: slideIn 1s ease forwards;
-    }
-    @keyframes slideIn {
-      from { transform: translate(-50%, -40%); opacity: 0; }
-      to { transform: translate(-50%, -50%); opacity: 1; }
-    }
-    .login-box input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 5px;
-      background: #444;
-      color: white;
-    }
-    .login-box button {
-      width: 100%;
-      padding: 10px;
-      background: #00e5ff;
-      border: none;
-      color: black;
-      font-weight: bold;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .login-box button:hover {
-      background: #00bcd4;
-    }
-    .footer {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      color: white;
-      opacity: 0.4;
-    }
-    .footer a {
-      color: white;
-      text-decoration: none;
-    }
-  </style>
+  }
+  @keyframes fadeIn {
+    to {opacity: 1;}
+  }
+  body {
+    margin: 0; padding: 0; height: 100vh;
+    background: url('https://i.gifer.com/XVKg.gif') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex; justify-content: center; align-items: center; flex-direction: column;
+  }
+  #loginBox {
+    background: rgba(0,0,0,0.7);
+    padding: 30px 40px;
+    border-radius: 10px;
+    width: 320px;
+    box-sizing: border-box;
+    color: #eee;
+    box-shadow: 0 0 15px rgba(0,0,0,0.8);
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+    animation-delay: 5s;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    animation: glow 3s ease-in-out infinite;
+  }
+  input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background: #555;
+    color: #eee;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  button {
+    width: 100%;
+    padding: 12px;
+    background: #57a6ff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #3a84e6;
+  }
+  #errorMsg {
+    margin-top: 10px;
+    color: #ff5c5c;
+    font-weight: bold;
+    height: 20px;
+    text-align: center;
+  }
+  a.createAccount {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: #9ecaff;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  a.createAccount:hover {
+    text-decoration: underline;
+  }
+  #footerText {
+    position: fixed;
+    bottom: 10px; left: 10px;
+    color: rgba(255,255,255,0.5);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.3s;
+  }
+  #footerText:hover {
+    color: rgba(255,255,255,0.9);
+  }
+</style>
 </head>
 <body>
 
-  <div class="kros-text">KROS-TR</div>
+<div id="loginBox">
+  <h1>KROS-TR</h1>
+  <input type="email" id="email" placeholder="E-posta" />
+  <input type="password" id="password" placeholder="Şifre" />
+  <button onclick="login()">Giriş Yap</button>
+  [20:37, 17.08.2025] Bizimki: <div id="errorMsg"></div>
+  <a href="https://discord.gg/Zeyw3utn" target="_blank" class="createAccount">Hesap Oluştur</a>
+</div>
 
-  <div class="login-box" id="loginBox">
-    <input id="email" type="email" placeholder="E-posta">
-    <input id="password" type="password" placeholder="Şifre">
-    <button onclick="login()">Giriş Yap</button>
-  </div>
-  
-  <div class="footer">
-    <a href="https://discord.gg/Zeyw3utn" target="_blank">Kurucu Kros-TR@</a>
-  </div>
+<div id="footerText" onclick="window.open('https://discord.gg/Zeyw3utn','_blank')">Kurucu Kros-TR@</div>
 
-  <script>
-    // 5 saniyede kutuyu göster
-    setTimeout(() => {
-      document.getElementById('loginBox').style.display = 'block';
-    }, 5000);
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 
-    function login() {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-
-      if (!email || !password) {
-        alert("E-posta ve şifre boş olamaz!");
-        return;
-      }
-
-      // Firebase girişi buraya eklenecekse buraya yaz
-      // Şu an sadece yönlendiriyor:
-      window.location.href = "https://alperenzorlu26-droid.github.io/anasayfa.html";
+  const firebaseConfig = {
+    apiKey: "AIzaSyAONQMX3pl-P5i2JQjoj5qbNtvKPdegITE",
+    authDomain: "login-aa0a4.firebaseapp.com",
+    projectId: "login-aa0a4",
+    storageBucket: "login-aa0a4.firebasestorage.app",
+    messagingSenderId: "222150441225",
+    appId: "1:222150441225:web:5e96c2c972f50f54…
+[20:37, 17.08.2025] Bizimki: showError("Lütfen e-posta ve şifre girin!");
+      return;
     }
-  </script>
+    signInWithEmailAndPassword(auth, email, pass)
+      .then(() => {
+        window.location.href = "anasayfa.html"; 
+      })
+      .catch((error) => {
+        showError("Giriş başarısız: " + error.message);
+      });
+  }
+</script>
+
 </body>
 </html>
-    
