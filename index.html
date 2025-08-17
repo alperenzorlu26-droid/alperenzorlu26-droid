@@ -1,86 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-  <title>Giriş</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-    body, html {
-      height: 100%;
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: url('https://i.pinimg.com/originals/b0/eb/92/b0eb9271c6f47e7a63a2c95fce4a3cd5.gif') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-    }
-    #welcome {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2rem;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      width: 100vw;
-      background: rgba(0,0,0,0.4);
-      z-index: 10;
-    }
-    #loginForm {
-      display: none;
-      max-width: 320px;
-      margin: 100px auto;
-      background: rgba(0,0,0,0.5);
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.8);
-    }
-    #loginForm h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-    #loginForm input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-    #loginForm button {
-      width: 100%;
-      padding: 10px;
-      background-color: #1a73e8;
-      border: none;
-      border-radius: 4px;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 10px;
-      font-size: 1rem;
-      transition: background-color 0.3s;
-    }
-    #loginForm button:hover {
-      background-color: #1669c1;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login/Register</title>
+<style>
+  /* Arka plan gif */
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: url('https://i.pinimg.com/originals/b0/eb/92/b0eb9271c6f47e7a63a2c95fce4a3cd5.gif') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Form kapsayıcı */
+  .container {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #000;
+    width: 320px;
+    color: white;
+  }
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    background: #1e90ff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #1c86ee;
+  }
+</style>
 </head>
 <body>
-
-  <div id="welcome">Hoşgeldin</div>
-
-  <div id="loginForm">
+  <div class="container">
     <h2>Giriş</h2>
-    <input id="loginEmail" placeholder="Email" type="email" required><br>
-    <input id="loginPass" type="password" placeholder="Şifre" required><br>
+    <input id="loginEmail" type="email" placeholder="Email" />
+    <input id="loginPass" type="password" placeholder="Şifre" />
     <button onclick="login()">Giriş Yap</button>
+
+    <h2>Kayıt</h2>
+    <input id="regEmail" type="email" placeholder="Email" />
+    <input id="regPass" type="password" placeholder="Şifre" />
+    <input id="regPassConfirm" type="password" placeholder="Şifre Tekrar" />
+    <button onclick="register()">Kayıt Ol</button>
   </div>
 
+  <!-- Firebase v10 -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDCPpr2qtXZTWzxTjYL2_Wuhmr3paIagYA",
@@ -97,16 +93,24 @@
       const pass = document.getElementById('loginPass').value;
 
       signInWithEmailAndPassword(auth, email, pass)
-        .then(() => alert("Giriş Başarılı"))
+      .then(() => alert("Giriş Başarılı"))
         .catch(e => alert(e.message));
     }
 
-    // 1.5 saniye sonra hoşgeldin gizlenip form gösterilsin
-    setTimeout(() => {
-      document.getElementById('welcome').style.display = 'none';
-      document.getElementById('loginForm').style.display = 'block';
-    }, 1500);
-  </script>
+    window.register = function () {
+      const email = document.getElementById('regEmail').value;
+      const pass = document.getElementById('regPass').value;
+      const passConfirm = document.getElementById('regPassConfirm').value;
 
+      if(pass !== passConfirm){
+        alert("Şifreler eşleşmiyor!");
+        return;
+      }
+
+      createUserWithEmailAndPassword(auth, email, pass)
+        .then(() => alert("Kayıt Başarılı"))
+        .catch(e => alert(e.message));
+    }
+  </script>
 </body>
 </html>
