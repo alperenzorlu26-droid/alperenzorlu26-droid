@@ -1,183 +1,121 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>-PMB-</title>
-<style>
-  @keyframes glow {
-    0%, 100% {
-      text-shadow: 0 0 8px #57a6ff;
-      color: #57a6ff;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Giriş Sayfası</title>
+  <style>
+    body {
+      margin: 0; padding: 0;
+      background: url('https://i.gifer.com/XVKg.gif') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
     }
-    50% {
-      text-shadow: 0 0 20px #9ecaff;
-      color: #9ecaff;
+    .login-box {
+      background: rgba(0,0,0,0.7);
+      padding: 30px;
+      border-radius: 10px;
+      width: 300px;
+      box-sizing: border-box;
+      text-align: center;
+      animation: fadeIn 5s ease forwards;
+      opacity: 0;
     }
-  }
-  @keyframes fadeIn {
-    to {opacity: 1;}
-  }
-  body {
-    margin: 0; padding: 0; height: 100vh;
-    background: url('https://i.gifer.com/XVKg.gif') no-repeat center center fixed;
-    background-size: cover;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex; justify-content: center; align-items: center; flex-direction: column;
-  }
-  #loginBox {
-    background: rgba(0,0,0,0.7);
-    padding: 30px 40px;
-    border-radius: 10px;
-    width: 320px;
-    box-sizing: border-box;
-    color: #eee;
-    box-shadow: 0 0 15px rgba(0,0,0,0.8);
-    opacity: 0;
-    animation: fadeIn 2s forwards;
-    animation-delay: 5s;
-  }
-  h1 {
-    text-align: center;
-    margin-bottom: 25px;
-    animation: glow 3s ease-in-out infinite;
-  }
-  input {
-    width: 100%;
-    padding: 12px 14px;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 5px;
-    background: #555;
-    color: #eee;
-    font-size: 16px;
-    box-sizing: border-box;
-  }
-  button {
-    width: 100%;
-    padding: 12px;
-    background: #57a6ff;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  button:hover {
-    background: #3a84e6;
-  }
-  #errorMsg {
-    margin-top: 10px;
-    color: #ff5c5c;
-    font-weight: bold;
-    height: 20px;
-    text-align: center;
-  }
-  a.createAccount {
-    display: block;
-    margin-top: 15px;
-    text-align: center;
-    color: #9ecaff;
-    text-decoration: none;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  a.createAccount:hover {
-    text-decoration: underline;
-  }
-  #footerText {
-    position: fixed;
-    bottom: 10px; left: 10px;
-    color: rgba(255,255,255,0.5);
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    user-select: none;
-    transition: color 0.3s;
-  }
-  #footerText:hover {
-    color: rgba(255,255,255,0.9);
-  }
-</style>
+    @keyframes fadeIn {
+      to {opacity: 1;}
+    }
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+      box-sizing: border-box;
+      font-size: 16px;
+      background: #444;
+      color: white;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #27ae60;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #2ecc71;
+    }
+    a {
+      color: #3498db;
+      text-decoration: none;
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 </head>
 <body>
+  <div class="login-box" id="loginBox">
+    <h2>KROS-TR</h2>
+    <input type="email" id="email" placeholder="E-posta" required />
+    <input type="password" id="password" placeholder="Şifre" required />
+    <button onclick="login()">Giriş Yap</button>
+    <a href="https://discord.gg/Zeyw3utn" target="_blank">Hesap oluşturun</a>
+  </div>
 
-<div id="loginBox">
-  <h1>KROS-TR</h1>
-  <input type="email" id="email" placeholder="E-posta" />
-  <input type="password" id="password" placeholder="Şifre" />
-  <button onclick="login()">Giriş Yap</button>
-  <div id="errorMsg"></div>
-  <a href="https://discord.gg/Zeyw3utn" target="_blank" class="createAccount">Hesap Oluştur</a>
-</div>
+  <script>
+    // Firebase konfigürasyonunu kendi projenle değiştir:
+    const firebaseConfig = {
+      apiKey: "AIzaSyAONQMX3pl-P5i2JQjoj5qbNtvKPdegITE",
+      authDomain: "login-aa0a4.firebaseapp.com",
+      projectId: "login-aa0a4",
+      storageBucket: "login-aa0a4.appspot.com",
+      messagingSenderId: "222150441225",
+      appId: "1:222150441225:web:5e96c2c972f50f54edbbd8",
+      measurementId: "G-YZ4CHCJBCB"
+    };
 
-<div id="footerText" onclick="window.open('https://discord.gg/Zeyw3utn','_blank')">Kurucu Kros-TR@</div>
+    // Firebase'i başlat
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+    // Login fonksiyonu
+    function login() {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAONQMX3pl-P5i2JQjoj5qbNtvKPdegITE",
-    authDomain: "login-aa0a4.firebaseapp.com",
-    projectId: "login-aa0a4",
-    storageBucket: "login-aa0a4.firebasestorage.app",
-    messagingSenderId: "222150441225",
-    appId: "1:222150441225:web:5e96c2c972f50f54…
-[20:37, 17.08.2025] Bizimki: showError("Lütfen e-posta ve şifre girin!");
-      return;
+      if (!email || !password) {
+        alert('Lütfen e-posta ve şifrenizi girin.');
+        return;
+      }
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then(userCredential => {
+          alert('Giriş başarılı! Hoş geldin ' + userCredential.user.email);
+          // Giriş sonrası anasayfaya yönlendir:
+          window.location.href = 'anasayfa.html';
+        })
+        .catch(error => {
+          alert('Giriş başarısız: ' + error.message);
+        });
     }
-    signInWithEmailAndPassword(auth, email, pass)
-      .then(() => {
-        window.location.href = "anasayfa.html"; 
-      })
-      .catch((error) => {
-        showError("Giriş başarısız: " + error.message);
-      });
-  }
-</script>
-
+  </script>
 </body>
 </html>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDCPpr2qtXZTWzxTjYL2_Wuhmr3paIagYA",
-    authDomain: "ddnet-e59a3.firebaseapp.com",
-    projectId: "ddnet-e59a3",
-    appId: "1:261161650747:web:def20674be2b15d0186a1e"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  window.login = function () {
-    const email = document.getElementById('loginEmail').value;
-    const pass = document.getElementById('loginPass').value;
-
-    signInWithEmailAndPassword(auth, email, pass)
-      .then(() => {
-        alert("Giriş Başarılı");
-        window.location.href = "anasayfa.html";  // Buraya yönlendirme eklendi
-      })
-      .catch(e => alert(e.message));
-  }
-
-  window.register = function () {
-    const email = document.getElementById('regEmail').value;
-    const pass = document.getElementById('regPass').value;
-
-    createUserWithEmailAndPassword(auth, email, pass)
-      .then(() => alert("Kayıt Başarılı"))
-[20:54, 17.08.2025] Bizimki: .catch(e => alert(e.message));
-  }
-</script>
-
-
-
-
-
