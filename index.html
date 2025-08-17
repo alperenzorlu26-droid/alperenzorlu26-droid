@@ -1,11 +1,44 @@
+```html
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UFT-8">
-  <title>Benim Sitem</title>
-</head>
+<head><title>Login/Register</title></head>
 <body>
-  <h1>Merhaba, ben Alperen!</h1>
-  <p>Bu benim kişisel sitem </p>
+  <h2>Giriş</h2>
+  <input id="loginEmail" placeholder="Email"><br>
+  <input id="loginPass" type="password" placeholder="Şifre"><br>
+  <button onclick="login()">Giriş Yap</button>
+
+  <h2>Kayıt</h2>
+  <input id="regEmail" placeholder="Email"><br>
+  <input id="regPass" type="password" placeholder="Şifre"><br>
+  <button onclick="register()">Kayıt Ol</button>
+
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "BURAYA_YAPIŞTIR",
+      authDomain: "BURAYA_YAPIŞTIR",
+      projectId: "BURAYA_YAPIŞTIR",
+      appId: "BURAYA_YAPIŞTIR"
+    };
+    firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+    function login() {
+      auth.signInWithEmailAndPassword(
+        document.getElementById('loginEmail').value,
+        document.getElementById('loginPass').value
+      ).then(() => alert("Giriş Başarılı")).catch(e => alert(e.message));
+    }
+
+    function register() {
+      auth.createUserWithEmailAndPassword(
+        document.getElementById('regEmail').value,
+        document.getElementById('regPass').value
+      ).then(() => alert("Kayıt Başarılı")).catch(e => alert(e.message));
+    }
+  </script>
 </body>
 </html>
+```
