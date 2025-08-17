@@ -1,66 +1,89 @@
-[18:00, 17.08.2025] Bizimki: <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="tr">
 <head>
-  <title>Login/Register</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 400px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #f9f9f9;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #333;
-      text-align: center;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0 15px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-      font-size: 14px;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-    button:hover {
-      background: #0056b3;
-    }
-    .section {
-      margin-bottom: 40px;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Giriş & Kayıt</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  body {
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.5);
+    z-index: 0;
+  }
+  .container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 40px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    max-width: 700px;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .form-box {
+    width: 300px;
+  }
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+  }
+  button {
+    width: 100%;
+    padding: 12px;
+    background: #007BFF;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #0056b3;
+  }
+</style>
 </head>
 <body>
+  <div class="container">
+    <div class="form-box">
+      <h2>Giriş</h2>
+      <input id="loginEmail" type="email" placeholder="Email" />
+      <input id="loginPass" type="password" placeholder="Şifre" />
+      <button onclick="login()">Giriş Yap</button>
+    </div>
 
-  <div class="section">
-    <h2>Giriş</h2>
-    <input id="loginEmail" placeholder="Email" type="email">
-    <input id="loginPass" placeholder="Şifre" type="password">
-    <button onclick="login()">Giriş Yap</button>
+    <div class="form-box">
+      <h2>Kayıt</h2>
+      <input id="regEmail" type="email" placeholder="Email" />
+      <input id="regPass" type="password" placeholder="Şifre" />
+      <button onclick="register()">Kayıt Ol</button>
+    </div>
   </div>
 
-  <div class="section">
-    <h2>Kayıt</h2>
-[18:00, 17.08.2025] Bizimki: <input id="regEmail" placeholder="Email" type="email">
-    <input id="regPass" placeholder="Şifre" type="password">
-    <button onclick="register()">Kayıt Ol</button>
-  </div>
-
-  <!-- Firebase v10 -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
@@ -74,24 +97,21 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-
-    window.login = function () {
+window.login = function() {
       const email = document.getElementById('loginEmail').value;
       const pass = document.getElementById('loginPass').value;
-
       signInWithEmailAndPassword(auth, email, pass)
         .then(() => alert("Giriş Başarılı"))
         .catch(e => alert(e.message));
-    }
+    };
 
-    window.register = function () {
+    window.register = function() {
       const email = document.getElementById('regEmail').value;
       const pass = document.getElementById('regPass').value;
-[18:00, 17.08.2025] Bizimki: createUserWithEmailAndPassword(auth, email, pass)
+      createUserWithEmailAndPassword(auth, email, pass)
         .then(() => alert("Kayıt Başarılı"))
         .catch(e => alert(e.message));
-    }
+    };
   </script>
-
 </body>
 </html>
