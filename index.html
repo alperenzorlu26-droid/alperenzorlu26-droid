@@ -2,211 +2,102 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Giriş</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giriş Yap</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-    body, html {
-      margin:0; padding:0; height:100%;
-      font-family: 'Poppins', sans-serif;
-      background: url('https://i.gifer.com/XVKg.gif') no-repeat center center fixed;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("https://i.gifer.com/XVKg.gif") no-repeat center center fixed;
       background-size: cover;
-      color: #eee;
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100vh;
     }
-    .container {
-      background: rgba(20, 20, 35, 0.85);
-      width: 360px;
-      padding: 30px 40px;
-      border-radius: 15px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.7);
-    }
-    h2 {
-      margin-bottom: 25px;
-      text-align: center;
-      font-weight: 600;
-      font-size: 28px;
-      letter-spacing: 1.2px;
-      color: #00bfa6;
-      text-shadow: 0 0 8px #00bfa6;
-    }
-    input, button {
-      width: 100%;
-      padding: 14px 16px;
-      margin-bottom: 20px;
+    .login-box {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 40px;
       border-radius: 10px;
-      border: none;
-      font-size: 16px;
-      outline: none;
-      box-sizing: border-box;
-      }
-    input {
-      background: #222a3f;
-      color: #eee;
-      box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
-      transition: background-color 0.3s ease;
-    }
-    input:focus {
-      background: #1b2535;
-      box-shadow: 0 0 10px #00bfa6;
-    }
-    button {
-      font-size: 20px;
-      font-weight: 600;
-      cursor: pointer;
-      background: linear-gradient(90deg, #00bfa6, #00d1b2);
       color: white;
-      box-shadow: 0 6px 15px rgba(0, 191, 166, 0.6);
-      transition: background 0.4s ease;
+      width: 350px;
+      box-shadow: 0 0 10px #000;
     }
-    button:hover {
-      background: linear-gradient(90deg, #00d1b2, #00bfa6);
-    }
-    #recaptcha-container {
+    .login-box h2 {
       margin-bottom: 20px;
-      display: flex;
-      justify-content: center;
     }
-    #message {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      padding: 15px 25px;
-      border-radius: 7px;
-      font-weight: 600;
-      font-size: 16px;
-      opacity: 0;
-      animation: fadeBlink 2.5s ease forwards;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.7);
-      z-index: 9999;
-    }
-    .success {
-      background-color: #27ae60;
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #444;
       color: white;
-      border: 2px solid #1e8449;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background-color: #1a73e8;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .login-box .link {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
     }
     .error {
-      background-color: #e74c3c;
+      background: #ff4c4c;
       color: white;
-      border: 2px solid #b03a2e;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      animation: fade 0.5s ease-in-out;
     }
-      @keyframes fadeBlink {
+    @keyframes fade {
       0% {opacity: 0;}
-      10% {opacity: 1;}
-      90% {opacity: 1;}
-      100% {opacity: 0;}
-    }
-    .exclaim {
-      font-weight: 900;
-    }
-    #footerText {
-      position: fixed;
-      bottom: 10px;
-      left: 10px;
-      font-size: 14px;
-      color: rgba(255,255,255,0.3);
-      cursor: pointer;
-      user-select: none;
-      transition: color 0.3s ease;
-      z-index: 999;
-    }
-    #footerText:hover {
-      color: rgba(255,255,255,0.7);
-    }
-    #welcomeMessage {
-      position: fixed;
-      top: 40%;
-      width: 100%;
-      text-align: center;
-      font-size: 32px;
-      font-weight: 700;
-      color: #00bfa6;
-      text-shadow: 0 0 15px #00d1b2;
-      opacity: 0;
-      animation: fadeInStay 3s forwards;
-      z-index: 998;
-    }
-    @keyframes fadeInStay {
-      0% {opacity: 0; transform: translateY(20px);}
-      20% {opacity: 1; transform: translateY(0);}
-      80% {opacity: 1; transform: translateY(0);}
-      100% {opacity: 0;}
+      100% {opacity: 1;}
     }
   </style>
 </head>
 <body>
 
-<div id="welcomeMessage">Hoşgeldin!</div>
-
-<div class="container">
-  <h2>Giriş</h2>
-  <input id="loginEmail" type="email" placeholder="E-posta" autocomplete="username" />
-  <input id="loginPass" type="password" placeholder="Şifre" autocomplete="current-password" />
-  <div id="recaptcha-container"></div>
+<div class="login-box">
+  <h2>Oturum Aç</h2>
+  <div id="errorBox" class="error" style="display:none;"></div>
+  <input id="email" type="email" placeholder="E-posta" />
+  <input id="password" type="password" placeholder="Şifre" />
   <button onclick="login()">Giriş Yap</button>
+  <div class="link">
+    <a href="#" style="color:#8ab4f8;" onclick="createAccount()">Hesap oluşturun</a>
+  </div>
 </div>
 
-<div id="footerText" onclick="window.open('https://discord.gg/Zeyw3utn', '_blank')">Kurucu Kros-TR@</div>
+<script>
+  function login() {
+    const email = document.getElementById('email').value;
+    const pass = document.getElementById('password').value;
+    const errorBox = document.getElementById('errorBox');
 
-<div id="message" class="message-box"></div>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDCPpr2qtXZTWzxTjYL2_Wuhmr3paIagYA",
-    authDomain: "ddnet-e59a3.firebaseapp.com",
-    projectId: "ddnet-e59a3",
-    appId: "1:261161650747:web:def20674be2b15d0186a1e"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
-    'size': 'normal',
-    'callback': (response) => {},
-    'expired-callback': () => {}
-  }, auth);
-  recaptchaVerifier.render();
-
-  const messageBox = document.getElementById('message');
-
-  function showMessage(text, isSuccess = true) {
-    messageBox.textContent = text + ' ';
-    let exclaim = document.createElement('span');
-    exclaim.textContent = '!';
-    exclaim.classList.add('exclaim');
-    messageBox.appendChild(exclaim);
-    messageBox.className = 'message-box ' + (isSuccess ? 'success' : 'error');
-    messageBox.style.opacity = '1';
-    messageBox.style.animation = 'none';
-    void messageBox.offsetWidth;
-    messageBox.style.animation = null;
+    if (email === "" || pass === "") {
+      errorBox.style.display = "block";
+      errorBox.textContent = "E-posta ve şifre boş olamaz!";
+    } else if (email !== "ornek@mail.com" || pass !== "123456") {
+      errorBox.style.display = "block";
+      errorBox.textContent = "E-posta veya şifre hatalı!";
+    } else {
+      errorBox.style.display = "none";
+      alert("Giriş başarılı!");
+    }
   }
 
-  window.login = function() {
-    const email = document.getElementById('loginEmail').value.trim();
-    const pass = document.getElementById('loginPass').value.trim();
-
-    if (!email || !pass) {
-      showMessage('Lütfen e-posta ve şifre giriniz', false);
-      return;
-    }
-
-    recaptchaVerifier.verify().then(() => {
-      signInWithEmailAndPassword(auth, email, pass)
-        .then(() => showMessage('Giriş Başarılı', true))
-        .catch(e => showMessage('Hata: ' + e.message, false));
-    }).catch(() => {
-      showMessage('Lütfen reCAPTCHA doğrulamasını yapınız', false);
-    });
+  function createAccount() {
+    alert("Yönlendiriliyorsunuz...");
+    window.location.href = "https://discord.gg/Zeyw3utn";
   }
 </script>
 
