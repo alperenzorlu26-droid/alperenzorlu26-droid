@@ -46,3 +46,12 @@ document.getElementById("loginBtn").addEventListener("click", () => {
   const password = document.getElementById("passwordInput").value;
   login(email, password);
 });
+js
+signInWithEmailAndPassword(auth, email, pass)
+  .then(() => {
+    alert("Giriş Başarılı");
+    window.location.href = "anasayfa.html";  // yönlendirme buraya
+  })
+  .catch(e => alert(e.message));
+
+
