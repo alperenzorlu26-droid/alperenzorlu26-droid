@@ -1,100 +1,90 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Login/Register</title>
-<style>
-  body {
-    margin: 0; padding: 0; height: 100vh;
-    background: url('https://i.pinimg.com/originals/b0/eb/92/b0eb9271c6f47e7a63a2c95fce4a3cd5.gif') no-repeat center center fixed;
-    background-size: cover;
-    font-family: Arial, sans-serif;
-    display: flex; justify-content: center; align-items: center;
-  }
-
-  .container {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px #000;
-    width: 300px; /* inputları 1cm kısalttım */
-    color: white;
-    position: relative;
-  }
-
-  h2 {
-    margin-top: 0; margin-bottom: 15px; text-align: center;
-  }
-
-  input {
-    width: calc(100% - 20px); /* input içindeki paddingle birlikte toplam 1cm azaldı */
-    padding: 10px;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    display: block;
-  }
-
-  button {
-    width: 100%;
-    padding: 12px;
-    background: #1e90ff;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background: #1c86ee;
-  }
-
-  /* Mesaj kutusu */
-  #messageBox {
-    position: absolute;
-    top: 10px;
-    left: -320px;
-    width: 280px;
-    padding: 15px;
-    border-radius: 8px;
-    color: white;
-    font-weight: bold;
-    box-shadow: 0 0 10px #000;
-    display: none;
-  }
-
-  #messageBox.success {
-    background-color: #4CAF50;
-  }
-
-  #messageBox.error {
-    background-color: #f44336;
-  }
-</style>
+  <title>Login/Register</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100vh;
+      background: url('https://i.pinimg.com/originals/b0/eb/92/b0eb9271c6f47e7a63a2c95fce4a3cd5.gif') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+    .container {
+      width: calc(300px - 10mm);
+      margin: 30px auto;
+      background: rgba(0,0,0,0.6);
+      padding: 20px 15px;
+      border-radius: 8px;
+    }
+    input {
+      width: calc(100% - 10mm);
+      padding: 8px;
+      margin: 10px 0;
+      border-radius: 4px;
+      border: none;
+    }
+    button {
+      width: calc(100% - 10mm);
+      padding: 10px;
+      background: #007bff;
+      border: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #messageBox {
+      position: fixed;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 15px 20px;
+      border-radius: 0 10px 10px 0;
+      font-weight: bold;
+      color: white;
+      font-size: 16px;
+      animation: blink 1s infinite;
+      display: none;
+      z-index: 1000;
+      min-width: 130px;
+    }
+    #messageBox.success {
+      background-color: #28a745;
+      border: 2px solid #1e7e34;
+    }
+    #messageBox.error {
+      background-color: #dc3545;
+      border: 2px solid #b02a37;
+    }
+    @keyframes blink {
+      0%, 50%, 100% {opacity: 1;}
+      25%, 75% {opacity: 0.4;}
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <div id="messageBox"></div>
-
     <h2>Giriş</h2>
-    <input id="loginEmail" type="email" placeholder="Email" />
-    <input id="loginPass" type="password" placeholder="Şifre" />
+    <input id="loginEmail" placeholder="Email"><br>
+    <input id="loginPass" type="password" placeholder="Şifre"><br>
     <button onclick="login()">Giriş Yap</button>
 
     <h2>Kayıt</h2>
-    <input id="regEmail" type="email" placeholder="Email" />
-    <input id="regPass" type="password" placeholder="Şifre" />
-    <input id="regPassConfirm" type="password" placeholder="Şifre Tekrar" />
+    <input id="regEmail" placeholder="Email"><br>
+    <input id="regPass" type="password" placeholder="Şifre"><br>
+    <input id="regPassConfirm" type="password" placeholder="Şifre Tekrar"><br>
     <button onclick="register()">Kayıt Ol</button>
   </div>
+
+  <div id="messageBox"></div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-
     const firebaseConfig = {
       apiKey: "AIzaSyDCPpr2qtXZTWzxTjYL2_Wuhmr3paIagYA",
       authDomain: "ddnet-e59a3.firebaseapp.com",
@@ -105,15 +95,14 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    const msgBox = document.getElementById('messageBox');
+    const messageBox = document.getElementById('messageBox');
 
     function showMessage(text, type) {
-      msgBox.textContent = text;
-      msgBox.className = '';
-      msgBox.classList.add(type);
-      msgBox.style.display = 'block';
+      messageBox.textContent = text + " !";
+      messageBox.className = type;
+      messageBox.style.display = 'block';
       setTimeout(() => {
-        msgBox.style.display = 'none';
+        messageBox.style.display = 'none';
       }, 3500);
     }
 
@@ -131,10 +120,10 @@
       const pass = document.getElementById('regPass').value;
       const passConfirm = document.getElementById('regPassConfirm').value;
 
-      if(pass !== passConfirm){
-        showMessage("Şifreler eşleşmiyor!", "error");
+      if (pass !== passConfirm) {
+        showMessage("Şifreler uyuşmuyor", "error");
         return;
-      }
+        }
 
       createUserWithEmailAndPassword(auth, email, pass)
         .then(() => showMessage("Kayıt Başarılı", "success"))
