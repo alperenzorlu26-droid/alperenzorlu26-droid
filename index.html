@@ -1,107 +1,119 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Giriş Yap</title>
-  <link rel="icon" type="image/png" href="kolay.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Giriş</title>
+  <link rel="icon" type="image/png" href="kolay.png">
   <style>
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: url("https://i.gifer.com/XVKg.gif") no-repeat center center fixed;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://i.gifer.com/XVKg.gif') no-repeat center center fixed;
       background-size: cover;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      color: white;
+      overflow: hidden;
     }
-
-    .kros-baslik {
-      position: absolute;
-      top: 28%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 36px;
-      font-weight: 600;
-      color: #28a745;
-      text-shadow: 0 0 8px #28a745;
-      animation: parildama 2s infinite;
-      z-index: 2;
+    .kros-text {
+      text-align: center;
+      font-size: 32px;
+      margin-top: 30px;
+      color: #00e5ff;
+      animation: glow 1.5s infinite alternate;
+      opacity: 0;
+      animation: fadeIn 2s ease 5s forwards;
     }
-
-    @keyframes parildama {
-      0%, 100% {
-        text-shadow: 0 0 8px #28a745, 0 0 16px #28a745;
-      }
-      50% {
-        text-shadow: 0 0 4px #28a745, 0 0 8px #28a745;
-      }
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #00e5ff; }
+      to { text-shadow: 0 0 20px #00e5ff; }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
     .login-box {
-      background-color: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.7);
       padding: 30px;
       border-radius: 10px;
-      width: 320px;
-      text-align: center;
-      animation: fadeIn 1s ease-in-out 5s forwards;
-      opacity: 0;
-      z-index: 1;
-      position: relative;
+      display: none;
+      animation: slideIn 1s ease forwards;
     }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
+    @keyframes slideIn {
+      from { transform: translate(-50%, -40%); opacity: 0; }
+      to { transform: translate(-50%, -50%); opacity: 1; }
     }
-
     .login-box input {
-      width: 90%;
-      padding: 12px;
+      width: 100%;
+      padding: 10px;
       margin: 10px 0;
       border: none;
       border-radius: 5px;
       background: #444;
-      color: #fff;
+      color: white;
     }
-
     .login-box button {
       width: 100%;
-      padding: 12px;
-      background-color: #28a745;
+      padding: 10px;
+      background: #00e5ff;
       border: none;
-      border-radius: 5px;
-      color: white;
+      color: black;
       font-weight: bold;
+      border-radius: 5px;
       cursor: pointer;
-      font-size: 16px;
+      transition: 0.3s;
     }
-
-    .login-box a {
-      color: #00aaff;
-      font-size: 14px;
+    .login-box button:hover {
+      background: #00bcd4;
+    }
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      color: white;
+      opacity: 0.4;
+    }
+    .footer a {
+      color: white;
       text-decoration: none;
-    }
-
-    .login-box a:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-  <div class="kros-baslik">KROS-TR</div>
+  <div class="kros-text">KROS-TR</div>
 
-  <div class="login-box">
-    <input type="email" placeholder="Email" />
-    <input type="password" placeholder="Şifre" />
-    <button>Giriş Yap</button>
-    <p style="margin-top: 10px; color: #ccc;">
-      Hesap oluşturun <a href="https://discord.gg/Zeyw3utn" target="_blank">buraya tıklayın</a>
-      </p>
+  <div class="login-box" id="loginBox">
+    <input id="email" type="email" placeholder="E-posta">
+    <input id="password" type="password" placeholder="Şifre">
+    <button onclick="login()">Giriş Yap</button>
+  </div>
+  
+  <div class="footer">
+    <a href="https://discord.gg/Zeyw3utn" target="_blank">Kurucu Kros-TR@</a>
   </div>
 
+  <script>
+    // 5 saniyede kutuyu göster
+    setTimeout(() => {
+      document.getElementById('loginBox').style.display = 'block';
+    }, 5000);
+
+    function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      if (!email || !password) {
+        alert("E-posta ve şifre boş olamaz!");
+        return;
+      }
+
+      // Firebase girişi buraya eklenecekse buraya yaz
+      // Şu an sadece yönlendiriyor:
+      window.location.href = "https://alperenzorlu26-droid.github.io/anasayfa.html";
+    }
+  </script>
 </body>
 </html>
+    
