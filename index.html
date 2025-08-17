@@ -1,170 +1,143 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Giriş</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-  body, html {
-    margin:0; padding:0; height:100%; font-family: 'Poppins', sans-serif;
-    background: url('https://i.pinimg.com/originals/b0/eb/92/b0eb9271c6f47e7a63a2c95fce4a3cd5.gif') no-repeat center center fixed;
-    background-size: cover;
-    color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .container {
-    background: rgba(20, 20, 35, 0.85);
-    width: 360px;
-    padding: 30px 40px;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.7);
-  }
-  h2 {
-    margin-bottom: 25px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 28px;
-    letter-spacing: 1.2px;
-    color: #00bfa6;
-    text-shadow: 0 0 8px #00bfa6;
-  }
-  input {
-    width: 100%;
-    padding: 14px 16px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    border: none;
-    font-size: 16px;
-    outline: none;
-    background: #222a3f;
-    color: #eee;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
-    transition: background-color 0.3s ease;
-  }
-  input:focus {
-    background: #1b2535;
-    box-shadow: 0 0 10px #00bfa6;
-  }
-  button {
-    width: 100%;
-    padding: 15px 0;
-    font-size: 20px;
-    font-weight: 600;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    background: linear-gradient(90deg, #00bfa6, #00d1b2);
-    color: white;
-    box-shadow: 0 6px 15px rgba(0, 191, 166, 0.6);
-    transition: background 0.4s ease;
-  }
-  button:hover {
-    background: linear-gradient(90deg, #00d1b2, #00bfa6);
-  }
-  #message {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    padding: 15px 25px;
-    border-radius: 7px;
-    font-weight: 600;
-    font-size: 16px;
-    opacity: 0;
-    animation: fadeBlink 2.5s ease forwards;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.7);
-    z-index: 9999;
-  }
-  .success {
-    background-color: #27ae60;
-    color: white;
-    border: 2px solid #1e8449;
-  }
-  .error {
-    background-color: #e74c3c;
-    color: white;
-    border: 2px solid #b03a2e;
-  }
-  @keyframes fadeBlink {
-    0% {opacity: 0;}
-    10% {opacity: 1;}
-    90% {opacity: 1;}
-    100% {opacity: 0;}
-  }
-  .exclaim {
-    font-weight: 900;
-  }
-  #footerText {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    font-size: 14px;
-    color: rgba(255,255,255,0.3);
-    messageBox.style.animation = 'none';
-    void messageBox.offsetWidth;
-    messageBox.style.animation = null;
-  }
-
-  window.login = function() {
-    const email = document.getElementById('loginEmail').value.trim();
-    const pass = document.getElementById('loginPass').value.trim();
-
-    if (!email || !pass) {
-      showMessage('Lütfen e-posta ve şifre giriniz', false);
-      return;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Giriş</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body, html {
+      margin:0; padding:0; height:100%;
+      font-family: 'Poppins', sans-serif;
+      background: url('https://i.gifer.com/XVKg.gif') no-repeat center center fixed;
+      background-size: cover;
+      color: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-
-    // ReCAPTCHA doğrulaması kontrolü
-    recaptchaVerifier.verify().then(() => {
-      signInWithEmailAndPassword(auth, email, pass)
-        .then(() => showMessage('Giriş Başarılı', true))
-        .catch(e => showMessage('Hata: ' + e.message, false));
-    }).catch(() => {
-      showMessage('Lütfen reCAPTCHA doğrulamasını yapınız', false);
-    });
-  }
-</script>
-
-</body>
-</html>
-  cursor: pointer;
-    user-select: none;
-    transition: color 0.3s ease;
-    z-index: 999;
-  }
-  #footerText:hover {
-    color: rgba(255,255,255,0.7);
-  }
-  #welcomeMessage {
-    position: fixed;
-    top: 40%;
-    width: 100%;
-    text-align: center;
-    font-size: 32px;
-    font-weight: 700;
-    color: #00bfa6;
-    text-shadow: 0 0 15px #00d1b2;
-    opacity: 0;
-    animation: fadeInStay 3s forwards;
-    z-index: 998;
-  }
-  @keyframes fadeInStay {
-    0% {opacity: 0; transform: translateY(20px);}
-    20% {opacity: 1; transform: translateY(0);}
-    80% {opacity: 1; transform: translateY(0);}
-    100% {opacity: 0;}
-  }
-  #recaptcha-container {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-  }
-</style>
+    .container {
+      background: rgba(20, 20, 35, 0.85);
+      width: 360px;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+    }
+    h2 {
+      margin-bottom: 25px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 28px;
+      letter-spacing: 1.2px;
+      color: #00bfa6;
+      text-shadow: 0 0 8px #00bfa6;
+    }
+    input, button {
+      width: 100%;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+      box-sizing: border-box;
+      }
+    input {
+      background: #222a3f;
+      color: #eee;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+      transition: background-color 0.3s ease;
+    }
+    input:focus {
+      background: #1b2535;
+      box-shadow: 0 0 10px #00bfa6;
+    }
+    button {
+      font-size: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(90deg, #00bfa6, #00d1b2);
+      color: white;
+      box-shadow: 0 6px 15px rgba(0, 191, 166, 0.6);
+      transition: background 0.4s ease;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #00d1b2, #00bfa6);
+    }
+    #recaptcha-container {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    #message {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 15px 25px;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 16px;
+      opacity: 0;
+      animation: fadeBlink 2.5s ease forwards;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.7);
+      z-index: 9999;
+    }
+    .success {
+      background-color: #27ae60;
+      color: white;
+      border: 2px solid #1e8449;
+    }
+    .error {
+      background-color: #e74c3c;
+      color: white;
+      border: 2px solid #b03a2e;
+    }
+      @keyframes fadeBlink {
+      0% {opacity: 0;}
+      10% {opacity: 1;}
+      90% {opacity: 1;}
+      100% {opacity: 0;}
+    }
+    .exclaim {
+      font-weight: 900;
+    }
+    #footerText {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.3);
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.3s ease;
+      z-index: 999;
+    }
+    #footerText:hover {
+      color: rgba(255,255,255,0.7);
+    }
+    #welcomeMessage {
+      position: fixed;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+      font-size: 32px;
+      font-weight: 700;
+      color: #00bfa6;
+      text-shadow: 0 0 15px #00d1b2;
+      opacity: 0;
+      animation: fadeInStay 3s forwards;
+      z-index: 998;
+    }
+    @keyframes fadeInStay {
+      0% {opacity: 0; transform: translateY(20px);}
+      20% {opacity: 1; transform: translateY(0);}
+      80% {opacity: 1; transform: translateY(0);}
+      100% {opacity: 0;}
+    }
+  </style>
 </head>
 <body>
 
@@ -175,12 +148,13 @@
   <input id="loginEmail" type="email" placeholder="E-posta" autocomplete="username" />
   <input id="loginPass" type="password" placeholder="Şifre" autocomplete="current-password" />
   <div id="recaptcha-container"></div>
-  <button id="loginBtn" onclick="login()">Giriş Yap</button>
+  <button onclick="login()">Giriş Yap</button>
 </div>
 
 <div id="footerText" onclick="window.open('https://discord.gg/Zeyw3utn', '_blank')">Kurucu Kros-TR@</div>
 
 <div id="message" class="message-box"></div>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
   import { getAuth, signInWithEmailAndPassword, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
@@ -197,12 +171,8 @@
 
   window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
     'size': 'normal',
-    'callback': (response) => {
-      // reCAPTCHA doğrulandı
-    },
-    'expired-callback': () => {
-      // reCAPTCHA süresi doldu
-    }
+    'callback': (response) => {},
+    'expired-callback': () => {}
   }, auth);
   recaptchaVerifier.render();
 
@@ -214,8 +184,31 @@
     exclaim.textContent = '!';
     exclaim.classList.add('exclaim');
     messageBox.appendChild(exclaim);
-
     messageBox.className = 'message-box ' + (isSuccess ? 'success' : 'error');
     messageBox.style.opacity = '1';
+    messageBox.style.animation = 'none';
+    void messageBox.offsetWidth;
+    messageBox.style.animation = null;
+  }
 
-    // Animasyon reset
+  window.login = function() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass = document.getElementById('loginPass').value.trim();
+
+    if (!email || !pass) {
+      showMessage('Lütfen e-posta ve şifre giriniz', false);
+      return;
+    }
+
+    recaptchaVerifier.verify().then(() => {
+      signInWithEmailAndPassword(auth, email, pass)
+        .then(() => showMessage('Giriş Başarılı', true))
+        .catch(e => showMessage('Hata: ' + e.message, false));
+    }).catch(() => {
+      showMessage('Lütfen reCAPTCHA doğrulamasını yapınız', false);
+    });
+  }
+</script>
+
+</body>
+</html>
