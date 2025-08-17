@@ -7,171 +7,127 @@
     html, body {
       height: 100%;
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: Arial, sans-serif;
       overflow: hidden;
+      color: white;
+    }
+
+    body {
       background: url("https://i.gifer.com/XVKg.gif") no-repeat center center fixed;
       background-size: cover;
-      color: white;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
     .login-container {
-      background-color: rgba(0, 0, 0, 0.65);
-      padding: 40px 30px;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 40px;
       border-radius: 10px;
       width: 350px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
       opacity: 0;
       transform: scale(0.95);
-      animation: fadeInScale 1s ease-out forwards;
+      animation: showUp 1s ease-out forwards;
       animation-delay: 10s;
       display: none;
     }
 
-    @keyframes fadeInScale {
+    @keyframes showUp {
       to {
         opacity: 1;
         transform: scale(1);
+        box-shadow: 0 0 20px 5px #ffffff44;
       }
     }
 
     h2 {
-      margin-bottom: 25px;
-      font-weight: 700;
-      font-size: 28px;
-      text-align: center;
-      letter-spacing: 1px;
+      margin-bottom: 20px;
     }
 
     input, button {
       width: 100%;
-      padding: 14px;
+      padding: 12px;
       margin: 10px 0;
       border: none;
-      border-radius: 7px;
-      font-size: 16px;
-      <h2>Oturum Aç</h2>
-    <input type="email" id="email" placeholder="E-posta">
-    <input type="password" id="password" placeholder="Şifre">
-    <button onclick="login()">Giriş Yap</button>
-
-    <div id="message"></div>
-
-    <div class="create-link">
-      <a href="https://discord.gg/Zeyw3utn" target="_blank" rel="noopener noreferrer">Hesap oluşturun</a>
-    </div>
-  </div>
-
-  <script>
-    function login() {
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value.trim();
-      const message = document.getElementById('message');
-      message.style.display = 'none';
-      message.className = '';
-      message.textContent = '';
-
-      if (!email || !password) {
-        message.textContent = 'Lütfen e-posta ve şifreyi giriniz!';
-        message.className = 'error';
-        message.style.display = 'block';
-        return;
-      }
-
-      // Örnek kontrol - gerçek Firebase entegrasyonu eklenmeli
-      if (email === "admin@example.com" && password === "123456") {
-        message.textContent = 'Giriş başarılı!';
-        message.className = 'success';
-        message.style.display = 'block';
-      } else {
-        message.textContent = 'E-posta veya şifre hatalı!';
-        message.className = 'error';
-        box-sizing: border-box;
-      outline: none;
-      transition: background-color 0.3s ease;
-    }
-
-    input {
-      background-color: #4a4a4a;
+      border-radius: 5px;
+      background-color: #3a3a3a;
       color: white;
-    }
-
-    input::placeholder {
-      color: #ccc;
-    }
-
-    input:focus {
-      background-color: #5e5e5e;
+      font-size: 15px;
+      box-sizing: border-box;
     }
 
     button {
-      background-color: #3b82f6;
-      font-weight: 700;
+      background-color: #4285F4;
+      font-weight: bold;
       cursor: pointer;
-      color: white;
-      transition: background-color 0.3s ease;
     }
 
-    button:hover {
-      background-color: #2563eb;
-    }
-
-    #message {
-      margin-top: 15px;
-      font-weight: 600;
-      padding: 12px;
-      border-radius: 6px;
-      display: none;
-      animation: flash 1.5s ease-in-out 3;
+    .error, .success {
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      animation: fade 0.5s;
     }
 
     .error {
-      background-color: #ef4444;
-      color: white;
-      display: block;
+      background-color: #ff4c4c;
     }
 
     .success {
-      background-color: #22c55e;
-      color: white;
-      display: block;
+      background-color: #4caf50;
     }
 
-    @keyframes flash {
-      0%, 100% {opacity: 1;}
-      50% {opacity: 0.4;}
+    @keyframes fade {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
     .create-link {
-      margin-top: 20px;
       text-align: right;
+      margin-top: 10px;
     }
 
     .create-link a {
-      color: #93c5fd;
-      font-weight: 600;
+      color: #8ab4f8;
       text-decoration: none;
-    }
-
-    .create-link a:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
   <div class="login-container" id="loginBox">
-    message.style.display = 'block';
+    <h2>Oturum Aç</h2>
+    <input type="email" id="email" placeholder="E-posta">
+    <input type="password" id="password" placeholder="Şifre">
+    <button onclick="login()">Giriş Yap</button>
+    <div class="create-link">
+      <a href="https://discord.gg/Zeyw3utn" target="_blank">Hesap oluşturun</a>
+    </div>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const msg = document.getElementById('message');
+      msg.innerHTML = "";
+
+      if (!email || !password) {
+        msg.innerHTML = '<div class="error">Lütfen tüm alanları doldurun!</div>';
+        return;
+      }
+
+      if (email === "admin@example.com" && password === "123456") {
+        msg.innerHTML = '<div class="success">Giriş başarılı!</div>';
+      } else {
+        msg.innerHTML = '<div class="error">E-posta veya şifre hatalı!</div>';
       }
     }
 
-    // 10 saniye sonra kutuyu göster ve animasyonu başlat
     setTimeout(() => {
-      const box = document.getElementById('loginBox');
-      box.style.display = 'block';
-      box.style.animationPlayState = 'running';
+      document.getElementById("loginBox").style.display = "block";
     }, 10000);
   </script>
 
