@@ -1,136 +1,149 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Giriş Yap</title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-      color: white;
-    }
-
-    body {
-      background: url("https://i.gifer.com/XVKg.gif") no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .login-container {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 40px;
-      border-radius: 10px;
-      width: 350px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-      opacity: 0;
-      transform: scale(0.95);
-      animation: showUp 1s ease-out forwards;
-      animation-delay: 5s;
-      display: none;
-    }
-
-    @keyframes showUp {
-      to {
-        opacity: 1;
-        transform: scale(1);
-        box-shadow: 0 0 20px 5px #ffffff44;
-      }
-    }
-
-    h2 {
-      margin-bottom: 20px;
-    }
-
-    input, button {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 5px;
-      background-color: #3a3a3a;
-      color: white;
-      font-size: 15px;
-      box-sizing: border-box;
-    }
-
-    button {
-      background-color: #4285F4;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .error, .success {
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 5px;
-      animation: fade 0.5s;
-    }
-
-    .error {
-      background-color: #ff4c4c;
-    }
-
-    .success {
-      background-color: #4caf50;
-    }
-
-    @keyframes fade {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    .create-link {
-      text-align: right;
-      margin-top: 10px;
-    }
-
-    .create-link a {
-      color: #8ab4f8;
-      text-decoration: none;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Giriş Sayfası</title>
+<link rel="icon" type="image/png" href="kolay.png" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+  body, html {
+    margin:0; padding:0; height:100%;
+    font-family: 'Poppins', sans-serif;
+    background: url('https://i.gifer.com/XVKg.gif') no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden;
+  }
+  #loginBox {
+    background: rgba(0,0,0,0.7);
+    width: 320px;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
+    padding: 25px;
+    border-radius: 12px;
+    color: #ddd;
+    box-shadow: 0 0 15px #000;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+  }
+  #loginBox.show {
+    opacity: 1;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 12px 10px;
+    margin: 10px 0 20px 0;
+    border-radius: 6px;
+    border: none;
+    background: #444;
+    color: #eee;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  input::placeholder {
+    color: #bbb;
+  }
+  button {
+    width: 100%;
+    padding: 12px;
+    background: #28a745;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #218838;
+  }
+  #createAccount {
+    margin-top: 15px;
+    text-align: center;
+    color: #aaa;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+  }
+  #createAccount a {
+    color: #5bc0de;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  #createAccount a:hover {
+    text-decoration: underline;
+  }
+  #errorMsg {
+    background: #d9534f;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    display: none;
+    font-weight: 600;
+  }
+</style>
 </head>
 <body>
-
-  <div class="login-container" id="loginBox">
-    <h2>Oturum Aç</h2>
-    <input type="email" id="email" placeholder="E-posta">
-    <input type="password" id="password" placeholder="Şifre">
+  <div id="loginBox">
+    <div id="errorMsg"></div>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Şifre" />
     <button onclick="login()">Giriş Yap</button>
-    <div class="create-link">
-      <a href="https://discord.gg/Zeyw3utn" target="_blank">Hesap oluşturun</a>
-    </div>
-    <div id="message"></div>
+    <div id="createAccount">Hesap oluşturun <a href="https://discord.gg/Zeyw3utn" target="_blank">buraya tıklayın</a></div>
   </div>
 
-  <script>
-    function login() {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const msg = document.getElementById('message');
-      msg.innerHTML = "";
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 
-      if (!email || !password) {
-        msg.innerHTML = '<div class="error">Lütfen tüm alanları doldurun!</div>';
+    const firebaseConfig = {
+      apiKey: "AIzaSyDCPpr2qtXZTWzxTjYL2_Wuhmr3paIagYA",
+      authDomain: "ddnet-e59a3.firebaseapp.com",
+      projectId: "ddnet-e59a3",
+      appId: "1:261161650747:web:def20674be2b15d0186a1e"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const loginBox = document.getElementById('loginBox');
+    const errorMsg = document.getElementById('errorMsg');
+
+    // 5 saniye sonra göster
+    setTimeout(() => {
+      loginBox.classList.add('show');
+    }, 5000);
+
+    window.login = function() {
+      errorMsg.style.display = 'none';
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if(!email || !password) {
+        showError("Email ve şifre boş bırakılamaz!");
         return;
       }
 
-      if (email === "admin@example.com" && password === "123456") {
-        msg.innerHTML = '<div class="success">Giriş başarılı!</div>';
-      } else {
-        msg.innerHTML = '<div class="error">E-posta veya şifre hatalı!</div>';
-      }
+      signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        alert("Giriş Başarılı!");
+        errorMsg.style.display = 'none';
+      })
+      .catch((error) => {
+        showError("Giriş başarısız: " + error.message);
+      });
     }
 
-    setTimeout(() => {
-      document.getElementById("loginBox").style.display = "block";
-    }, 10000);
+    function showError(msg) {
+      errorMsg.textContent = msg;
+      errorMsg.style.display = 'block';
+    }
   </script>
-
 </body>
 </html>
-
