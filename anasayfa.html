@@ -1,15 +1,14 @@
-html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ana Sayfa</title>
+  <title>Görsel Üretici</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
+      background: #0d0d0d;
       font-family: 'Segoe UI', sans-serif;
-      background: #0f0f0f;
       color: white;
       display: flex;
       flex-direction: column;
@@ -19,33 +18,65 @@ html
     }
 
     h1 {
-      font-size: 3rem;
       margin-bottom: 20px;
+      font-size: 2.5rem;
     }
 
-    .btn {
-      padding: 12px 24px;
-      background: #1e90ff;
-      border: none;
+    input[type="text"] {
+      width: 300px;
+      padding: 12px;
       border-radius: 8px;
-      color: white;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      text-decoration: none;
+      border: none;
+      margin-bottom: 20px;
       font-size: 1rem;
     }
 
-    .btn:hover {
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #1e90ff;
+      color: white;
+      cursor: pointer;transition: background 0.3s;
+    }
+
+    button:hover {
       background: #63b3ed;
+    }
+
+    .result {
+      margin-top: 30px;
+    }
+
+    .result img {
+      max-width: 500px;
+      border-radius: 12px;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 
-  <h1>Hoşgeldin!</h1>
-  <a href="dcdrop.html" class="btn">DC-DROP Sayfasına Git</a>
+  <h1>Yapay Zeka ile Resim Oluştur</h1>
+
+  <input type="text" id="prompt" placeholder="Bir şey yaz örn: gece manzarası" />
+  <button onclick="generateImage()">Oluştur</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function generateImage() {
+      const prompt = document.getElementById("prompt").value;
+      const resultDiv = document.getElementById("result");
+
+      // Örnek resim yer tutucu (gerçek API bağlayınca değiştirilecek)
+      resultDiv.innerHTML = `
+        <p><strong>Oluşturulan görsel:</strong> "prompt"</p>
+        <img src="https://via.placeholder.com/512x300.png?text={encodeURIComponent(prompt)}" alt="AI Image" />
+      `;
+    }
+  </script>
 
 </body>
 </html>
-
-
